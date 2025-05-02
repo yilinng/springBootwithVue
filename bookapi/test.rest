@@ -1,0 +1,152 @@
+GET http://localhost:8080/api/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjA5NTUzOCwiZXhwIjoxNzQ2NzAwMzM4fQ.WRBf2L5V15KOSd8f2vgorPK2wkPIlNzKc6msIF-81C8
+
+###
+GET http://localhost:8080/api/users/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjA5NTUzOCwiZXhwIjoxNzQ2NzAwMzM4fQ.WRBf2L5V15KOSd8f2vgorPK2wkPIlNzKc6msIF-81C8
+
+###
+POST http://localhost:8080/api/signup
+Content-Type: application/json
+
+{
+  "username": "test12",
+  "email":"test12@test.com",
+  "password":"test12"
+}
+
+###
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "email":"test12@test.com",
+  "password":"test12"
+}
+
+###
+POST http://localhost:8080/api/signup
+Content-Type: application/json
+
+{
+  "username": "employee12",
+  "email":"employee12@employee.edu",
+  "password":"employee12"
+}
+
+###
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "email":"employee12@employee.edu",
+  "password":"employee12"
+}
+
+###
+
+###
+POST http://localhost:8080/api/signup
+Content-Type: application/json
+
+{
+  "username": "admin12",
+  "email":"admin12@admin.edu",
+  "password":"admin12"
+}
+
+###
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "email":"admin12@admin.edu",
+  "password":"admin12"
+}
+
+
+
+###
+GET http://localhost:8080/api/books/
+
+###
+POST http://localhost:8080/api/books/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NTkwODQyMCwiZXhwIjoxNzQ2NTEzMjIwfQ.a8-lg5t64Se2T18N5XlAV-r7iB0YDq7w9vEYlTxhOsI
+
+{
+  "title": "admin test...",
+  "author":"admin contents 123",
+  "price": 107
+}
+
+###
+PUT http://localhost:8080/api/books/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NTg5NDA1NywiZXhwIjoxNzQ2NDk4ODU3fQ.f26gVH6XFKJb2VXXaGCNCTphbARn0L6xydy5hUeW3MY
+
+{
+  "title": "admin12 title here....update",
+  "author":"admin12 content here......",
+  "price": 171
+}
+
+###
+GET http://localhost:8080/api/books/1
+
+###
+GET http://localhost:8080/api/books/search/?txt="post"
+
+###
+GET http://localhost:8080/api/reservations/
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTJAdGVzdC5jb20iLCJpYXQiOjE3NDYxNzg5MDMsImV4cCI6MTc0Njc4MzcwM30.0grjnuqpA9kkQiZPC9o7z0kZRGNeC15ICEDQqWuHen4
+
+
+###
+POST http://localhost:8080/api/reservations/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTJAdGVzdC5jb20iLCJpYXQiOjE3NDYxNzg5MDMsImV4cCI6MTc0Njc4MzcwM30.0grjnuqpA9kkQiZPC9o7z0kZRGNeC15ICEDQqWuHen4
+
+{
+  "title": "admin12 title here..",
+  "books": [
+    {
+      "id": 1,
+      "title": "admin post update",
+      "author": "admin contents",
+      "number": "e3b6876b-ae24-4db0-aa9e-d07e36b8c780",
+      "price": 197,
+      "create_date": "2025-04-29",
+      "update_date": "2025-05-02",
+      "user_id": 1
+    },
+    {
+      "id": 2,
+      "title": "admin test...",
+      "author": "admin contents 123",
+      "number": "1d84da84-9248-4659-a498-dcabbbe77d96",
+      "price": 107,
+      "create_date": "2025-04-29",
+      "update_date": null,
+      "user_id": 1
+    },
+  ]
+}
+
+###
+PUT http://localhost:8080/api/reservations/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTJAdGVzdC5jb20iLCJpYXQiOjE3NDU5MDk1MTAsImV4cCI6MTc0NjUxNDMxMH0.6zbxdESI_WV5eS3iHMmJfZkOjza3x3DH0rJKMN5cnVw
+
+{
+  "title": "test12 title here..update",
+  "author":"test12 content here....",
+  "price": 171
+}
+
+###
+
+DELETE  http://localhost:8080/api/reservations/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NTkxNDE0MywiZXhwIjoxNzQ2NTE4OTQzfQ.kBnMvCBHAsq-8BS3FNWp0gh5F0hiRF1qLQWOy-CXCL8

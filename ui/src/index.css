@@ -1,0 +1,45 @@
+/* ./your-css-folder/styles.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+}
+
+.header,
+.main,
+.footer {
+  margin: 0;
+  display: block;
+}
+
+
+label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}​
+
+input[type="text"]
+{
+    font-size:24px;
+}
+
+input {
+  margin: 7px;
+  padding: 2px;
+  width: 300px;
+}
