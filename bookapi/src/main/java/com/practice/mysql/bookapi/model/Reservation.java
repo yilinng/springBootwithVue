@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,13 +44,13 @@ public class Reservation {
 	@Column(name = "price")
 	private int price;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "BOOKS_RESERVATIONS", joinColumns = {
-			@JoinColumn(name = "BOOK_ID")
-	}, inverseJoinColumns = {
-			@JoinColumn(name = "RESERVATION_ID") })
+	// https://stackoverflow.com/questions/62623483/i-am-using-manytoone-onetomany-and-have-endless-loop-when-getting-data
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "RESERVATION_BOOKS", joinColumns = @JoinColumn(name = "RESERVATION_ID"), inverseJoinColumns = @JoinColumn(name = "BOOK_ID"))
+	@JsonBackReference
 	private List<Book> books = new ArrayList<>();
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;

@@ -3,6 +3,9 @@ package com.practice.mysql.bookapi.model;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import java.util.ArrayList;
 
 import jakarta.persistence.CascadeType;
@@ -34,7 +37,8 @@ public class User {
 	@Column(name = "email", unique = true)
 	private String email;
 
-	// @NotBlank(message = "password must not be empty")
+	// https://stackoverflow.com/questions/32219037/want-to-add-jsonignore-property-on-password-in-response-json
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "password")
 	private String password;
 

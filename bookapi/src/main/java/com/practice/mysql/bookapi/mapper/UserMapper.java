@@ -18,6 +18,8 @@ public class UserMapper {
 		userDto.setUsername(user.getUsername());
 		userDto.setEmail(user.getEmail());
 		userDto.setRoles(user.getRoles());
+		userDto.setBooks(user.getBooks());
+		userDto.setReservations(user.getReservations());
 
 		return userDto;
 	}

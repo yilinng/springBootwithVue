@@ -87,6 +87,7 @@ public class BookServiceImpl implements BookService {
 		book.setTitle(bookDto.getTitle());
 		book.setAuthor(bookDto.getAuthor());
 		book.setPrice(bookDto.getPrice());
+		book.setInventory(bookDto.getInventory());
 
 		LocalDate updateDate = LocalDate.now();
 		book.setUpdate_date(updateDate);

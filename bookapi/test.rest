@@ -1,6 +1,6 @@
 GET http://localhost:8080/api/users
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjA5NTUzOCwiZXhwIjoxNzQ2NzAwMzM4fQ.WRBf2L5V15KOSd8f2vgorPK2wkPIlNzKc6msIF-81C8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjQzNTQ2NSwiZXhwIjoxNzQ3MDQwMjY1fQ.DBgiA4ttsHokIEuVN9qCQ_z3K_hGsg8lGUDUaoLPJ0U
 
 ###
 GET http://localhost:8080/api/users/1
@@ -66,31 +66,42 @@ Content-Type: application/json
   "password":"admin12"
 }
 
+###
+GET http://localhost:8080/api/users/1/reservations
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjUxMDE0MSwiZXhwIjoxNzQ3MTE0OTQxfQ.cLS-ow77pKk7LafY9xtrtjgsBdlV9RM4cnWWEPfFEvM
 
 
 ###
 GET http://localhost:8080/api/books/
 
+
 ###
 POST http://localhost:8080/api/books/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NTkwODQyMCwiZXhwIjoxNzQ2NTEzMjIwfQ.a8-lg5t64Se2T18N5XlAV-r7iB0YDq7w9vEYlTxhOsI
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjUxMDE0MSwiZXhwIjoxNzQ3MTE0OTQxfQ.cLS-ow77pKk7LafY9xtrtjgsBdlV9RM4cnWWEPfFEvM
 
 {
-  "title": "admin test...",
-  "author":"admin contents 123",
-  "price": 107
+  "title": "admin12 test...",
+  "author":"admin12 content",
+  "price": 103,
+  "inventory": 100
 }
 
 ###
-PUT http://localhost:8080/api/books/1
+DELETE http://localhost:8080/api/books/9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjQzMTgxNSwiZXhwIjoxNzQ3MDM2NjE1fQ.LZSDzTp1wLJCOwosBB7ya9RxVvwnT4HNVCVzkWt_7lw
+
+###
+PUT http://localhost:8080/api/books/10
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NTg5NDA1NywiZXhwIjoxNzQ2NDk4ODU3fQ.f26gVH6XFKJb2VXXaGCNCTphbARn0L6xydy5hUeW3MY
 
 {
-  "title": "admin12 title here....update",
+  "title": "admin12 test3",
   "author":"admin12 content here......",
-  "price": 171
+  "price": 113,
+  "inventory": 100
 }
 
 ###
@@ -101,37 +112,31 @@ GET http://localhost:8080/api/books/search/?txt="post"
 
 ###
 GET http://localhost:8080/api/reservations/
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTJAdGVzdC5jb20iLCJpYXQiOjE3NDYxNzg5MDMsImV4cCI6MTc0Njc4MzcwM30.0grjnuqpA9kkQiZPC9o7z0kZRGNeC15ICEDQqWuHen4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjUxMDE0MSwiZXhwIjoxNzQ3MTE0OTQxfQ.cLS-ow77pKk7LafY9xtrtjgsBdlV9RM4cnWWEPfFEvM
 
+###
+GET http://localhost:8080/api/reservations/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjUxMDE0MSwiZXhwIjoxNzQ3MTE0OTQxfQ.cLS-ow77pKk7LafY9xtrtjgsBdlV9RM4cnWWEPfFEvM
 
 ###
 POST http://localhost:8080/api/reservations/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTJAdGVzdC5jb20iLCJpYXQiOjE3NDYxNzg5MDMsImV4cCI6MTc0Njc4MzcwM30.0grjnuqpA9kkQiZPC9o7z0kZRGNeC15ICEDQqWuHen4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjUxMDE0MSwiZXhwIjoxNzQ3MTE0OTQxfQ.cLS-ow77pKk7LafY9xtrtjgsBdlV9RM4cnWWEPfFEvM
 
 {
-  "title": "admin12 title here..",
+  "title": "admin12 first reservations",
   "books": [
     {
       "id": 1,
-      "title": "admin post update",
-      "author": "admin contents",
-      "number": "e3b6876b-ae24-4db0-aa9e-d07e36b8c780",
-      "price": 197,
-      "create_date": "2025-04-29",
-      "update_date": "2025-05-02",
-      "user_id": 1
-    },
-    {
-      "id": 2,
-      "title": "admin test...",
-      "author": "admin contents 123",
-      "number": "1d84da84-9248-4659-a498-dcabbbe77d96",
-      "price": 107,
-      "create_date": "2025-04-29",
+      "title": "admin12 test...",
+      "author": "admin12 content",
+      "number": "1a710280-c4c0-40d4-857c-a529a19b95d9",
+      "price": 103,
+      "create_date": "2025-05-06",
       "update_date": null,
-      "user_id": 1
-    },
+      "user_id": 1,
+      "inventory": 100
+    }
   ]
 }
 
@@ -148,5 +153,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MTJAdGVzdC5jb20iLCJpY
 
 ###
 
-DELETE  http://localhost:8080/api/reservations/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NTkxNDE0MywiZXhwIjoxNzQ2NTE4OTQzfQ.kBnMvCBHAsq-8BS3FNWp0gh5F0hiRF1qLQWOy-CXCL8
+DELETE  http://localhost:8080/api/reservations/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjUxMDE0MSwiZXhwIjoxNzQ3MTE0OTQxfQ.cLS-ow77pKk7LafY9xtrtjgsBdlV9RM4cnWWEPfFEvM

@@ -15,6 +15,8 @@ public class BookMapper {
     bookDto.setPrice(book.getPrice());
     bookDto.setNumber(book.getNumber());
     bookDto.setUser_id(book.getUser().getId());
+    bookDto.setInventory(book.getInventory());
+
     return bookDto;
   }
 
@@ -28,6 +30,7 @@ public class BookMapper {
     book.setCreate_date(bookDto.getCreate_date());
     book.setUpdate_date(bookDto.getUpdate_date());
     // book.setUser(bookDto.getUser_id());
+
     return book;
   }
 

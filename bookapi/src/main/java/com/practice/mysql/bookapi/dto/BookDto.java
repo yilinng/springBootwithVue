@@ -14,4 +14,5 @@ public class BookDto {
 	private LocalDate create_date;
 	private LocalDate update_date;
 	private int user_id;
+	private int inventory;
 }

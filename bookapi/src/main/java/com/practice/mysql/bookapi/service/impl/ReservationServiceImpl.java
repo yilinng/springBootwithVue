@@ -52,13 +52,13 @@ public class ReservationServiceImpl implements ReservationService {
 		System.out.println("createReservation " + reservation);
 
 		int price = 0;
-		List<Book> books = new ArrayList<Book>();
-		for (Book book : reservation.getBooks()) {
 
-			Book findBook = bookRepository.findById(book.getId())
-					.orElseThrow(() -> new BookNotFoundException("Book could not be found"));
-			books.add(findBook);
+		// List<Book> findBooks = new ArrayList<Book>();
+		for (Book book : reservation.getBooks()) {
+			// findBooks.add(book);
 			price += book.getPrice();
+			// System.out.println("createReservation book " + book);
+
 		}
 
 		reservation.setTitle(reservation.getTitle());
@@ -68,7 +68,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 		reservation.setUser(userRepository.findByEmail(getUser().getUsername()));
 		reservation.setPrice(price);
-		reservation.setBooks(books);
+		reservation.setBooks(reservation.getBooks());
 
 		Reservation newReservation = reservationRepository.save(reservation);
 		return ReservationMapper.mapToDto(newReservation);
@@ -109,6 +109,7 @@ public class ReservationServiceImpl implements ReservationService {
 		reservation.setTitle(reservationDto.getTitle());
 		reservation.setCreated_date(reservationDto.getCreateDate());
 		reservation.setUpdate_date(updateDate);
+		reservation.setBooks(reservation.getBooks());
 
 		Reservation updatedReservation = reservationRepository.save(reservation);
 
