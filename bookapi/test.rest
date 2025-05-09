@@ -1,11 +1,11 @@
 GET http://localhost:8080/api/users
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjQzNTQ2NSwiZXhwIjoxNzQ3MDQwMjY1fQ.DBgiA4ttsHokIEuVN9qCQ_z3K_hGsg8lGUDUaoLPJ0U
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjcwODEyNSwiZXhwIjoxNzQ3MzEyOTI1fQ.BkJywXGf5wN-f53-68xMSC-OYj5BvQQRfkBR0Hk1Awo
 
 ###
 GET http://localhost:8080/api/users/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjA5NTUzOCwiZXhwIjoxNzQ2NzAwMzM4fQ.WRBf2L5V15KOSd8f2vgorPK2wkPIlNzKc6msIF-81C8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjcwODEyNSwiZXhwIjoxNzQ3MzEyOTI1fQ.BkJywXGf5wN-f53-68xMSC-OYj5BvQQRfkBR0Hk1Awo
 
 ###
 POST http://localhost:8080/api/signup
@@ -78,12 +78,12 @@ GET http://localhost:8080/api/books/
 ###
 POST http://localhost:8080/api/books/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjUxMDE0MSwiZXhwIjoxNzQ3MTE0OTQxfQ.cLS-ow77pKk7LafY9xtrtjgsBdlV9RM4cnWWEPfFEvM
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjcwODEyNSwiZXhwIjoxNzQ3MzEyOTI1fQ.BkJywXGf5wN-f53-68xMSC-OYj5BvQQRfkBR0Hk1Awo
 
 {
-  "title": "admin12 test...",
-  "author":"admin12 content",
-  "price": 103,
+  "title": "The Let Them Theory: A Life-Changing Tool That Millions of People Can't Stop Talking About",
+  "author":"Mel Robbins",
+  "price": 183,
   "inventory": 100
 }
 
@@ -93,14 +93,14 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjQzMTgxNSwiZXhwIjoxNzQ3MDM2NjE1fQ.LZSDzTp1wLJCOwosBB7ya9RxVvwnT4HNVCVzkWt_7lw
 
 ###
-PUT http://localhost:8080/api/books/10
+PUT http://localhost:8080/api/books/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NTg5NDA1NywiZXhwIjoxNzQ2NDk4ODU3fQ.f26gVH6XFKJb2VXXaGCNCTphbARn0L6xydy5hUeW3MY
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjY5NTM3MywiZXhwIjoxNzQ3MzAwMTczfQ.aXlJqQ2joKx-jil6-l670KUKXgmLQDNBCDw9NBKUWMI
 
 {
-  "title": "admin12 test3",
-  "author":"admin12 content here......",
-  "price": 113,
+  "title": "admin12 test3 update",
+  "author":"admin12",
+  "price": 183,
   "inventory": 100
 }
 

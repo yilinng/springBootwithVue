@@ -1,36 +1,40 @@
 <script setup>
-import { watch } from 'vue'
+import { watch, ref } from 'vue'
 import { useBookStore } from '../../stores/book'
 import { useUserStore } from '../../stores/user'
+import { useReservationStore } from '../../stores/reservation'
 
 const bookStore = useBookStore()
 const userStore = useUserStore()
+const reservationStore = useReservationStore()
 
 bookStore.getBooks()
 bookStore.checkAuthorize()
 
 userStore.checkAuthorize()
 
-/*
+const loading = ref(false)
+
 watch(
   bookStore,
   (state) => {
     console.log('watch state', state)
+    if (state.books) {
+      loading.value = true
+    }
   },
   { deep: true }
 )
-*/
 
-function substringTxt(txt) {
-  if (txt.length > 40) {
-    return txt.subString(0, 40) + '...'
-  }
-  return txt
+console.log('check cart', reservationStore.cartItems)
+
+function addToCart(obj) {
+  reservationStore.addToCart(obj)
 }
 </script>
 
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col" v-if="loading">
     <div
       class="create_book_url bg-blue-500 text-white m-2 p-2 w-36"
       v-if="userStore.haveAuthorize"
@@ -40,7 +44,7 @@ function substringTxt(txt) {
       >
     </div>
     <div
-      class="book my-4 p-2 border-solid border-4 border-light-blue-500"
+      class="book my-4 p-2 border-solid border-4 border-light-blue-500 space-y-3"
       v-for="book of bookStore.books"
     >
       <RouterLink
@@ -48,10 +52,23 @@ function substringTxt(txt) {
         :to="{ name: 'Book', params: { id: book.id } }"
       >
         <div class="flex flex-col">
-          <h2 class="text-2xl">{{ substringTxt(book.title) }}</h2>
-          <p class="font-xl">create date: {{ book.create_date }}</p>
+          <h2 class="text-2xl">
+            {{
+              book.title.length > 60
+                ? book.title.toString().substring(0, 60) + '...'
+                : book.title
+            }}
+          </h2>
+          <p class="font-xl">price: ${{ book.price }}</p>
         </div>
       </RouterLink>
+
+      <button
+        class="bg-blue-300 p-2 text-white border-blue-500"
+        @click="addToCart(book)"
+      >
+        Add to cart
+      </button>
     </div>
   </div>
 </template>

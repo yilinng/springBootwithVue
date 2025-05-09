@@ -17,3 +17,6 @@ https://javascript.info/async-await
 https://stackoverflow.com/questions/643879/css-to-make-html-page-footer-stay-at-bottom-of-the-page-with-a-minimum-height-b
 
 https://www.vuemastery.com/blog/refresh-proof-your-pinia-stores/
+https://vuejs.org/guide/components/provide-inject.html#working-with-reactivity
+
+https://vuejs.org/guide/built-ins/transition

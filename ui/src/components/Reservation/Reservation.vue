@@ -45,7 +45,10 @@ watch(
 */
 </script>
 <template>
-  <div class="reservation_details" v-if="reservationStore.reservation">
+  <div
+    class="reservation_details space-y-6"
+    v-if="reservationStore.reservation"
+  >
     <div>reservation id: {{ $route.params.id }}</div>
 
     <h1 class="text-3xl my-4">
@@ -57,12 +60,25 @@ watch(
       <p>update_date: {{ reservationStore.reservation.updateDate }}</p>
     </div>
 
-    <div>
-      <p>user_id: {{ reservationStore.reservation.user_id }}</p>
+    <div
+      v-for="item in reservationStore.reservation.books"
+      class="border rounded-lg p-2 bg-white flex flex-row justify-around space-x-2 w-3/4 md:w-full mx-auto"
+    >
+      <h3 class="p-1 w-full md:w-1/2">
+        {{
+          item.title.length > 60
+            ? item.title.toString().substring(0, 60) + '...'
+            : item.title
+        }}
+      </h3>
+
+      <h4 class="p-1 self-center">${{ item.price }}</h4>
     </div>
 
-    <div>
-      <p>book_id: {{ reservationStore.reservation.book_id }}</p>
+    <hr />
+
+    <div class="text-center">
+      <p>total: ${{ reservationStore.reservation.price }}</p>
     </div>
 
     <div class="back_btn my-4 flex flex-row space-x-4">

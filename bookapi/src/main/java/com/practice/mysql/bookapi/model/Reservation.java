@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -47,7 +48,7 @@ public class Reservation {
 	// https://stackoverflow.com/questions/62623483/i-am-using-manytoone-onetomany-and-have-endless-loop-when-getting-data
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "RESERVATION_BOOKS", joinColumns = @JoinColumn(name = "RESERVATION_ID"), inverseJoinColumns = @JoinColumn(name = "BOOK_ID"))
-	@JsonBackReference
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private List<Book> books = new ArrayList<>();
 
 	@JsonIgnore

@@ -28,6 +28,7 @@ export const addBook = async (newObject) => {
   }
 
   console.log('config', config)
+  console.log('addBook', newObject)
 
   const { data } = await axios.post(`${apiBaseUrl}/books/`, newObject, config)
   return data

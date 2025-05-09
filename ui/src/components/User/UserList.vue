@@ -5,6 +5,8 @@ import { useUserStore } from '../../stores/user'
 
 const userStore = useUserStore()
 
+userStore.checkAuthorize()
+
 userStore.getAllUser()
 </script>
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, provide } from 'vue'
 
 import { useUserStore } from '../stores/user'
 
@@ -12,6 +12,7 @@ function login() {
   if (!email.value || !password.value) {
     return
   }
+
   userStore.login({
     email: email.value,
     password: password.value,
@@ -20,10 +21,13 @@ function login() {
 </script>
 
 <template>
-  <div class="bg-gray-50 p-4">
-    <h2 class="flex justify-center text-3xl my-4">login</h2>
-    <form @submit.prevent="login">
-      <div class="w-1/2 md:w-full flex justify-center">
+  <div class="bg-gray-50 p-4 table md:block m-auto">
+    <h2 class="flex justify-center text-3xl my-4 md:m-auto">login</h2>
+    <form
+      @submit.prevent="login"
+      class="my-4 flex flex-col items-baseline md:items-center"
+    >
+      <div class="my-2">
         <label for="email">email: </label>
         <input
           type="text"
@@ -31,7 +35,7 @@ function login() {
           class="border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
         />
       </div>
-      <div class="w-1/2 md:w-full my-4 flex justify-center">
+      <div class="my-2">
         <label for="password">password: </label>
         <input
           type="text"

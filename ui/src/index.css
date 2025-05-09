@@ -27,11 +27,7 @@ html {
 }
 
 
-label {
-  display: inline-block;
-  width: 140px;
-  text-align: right;
-}​
+​
 
 input[type="text"]
 {
@@ -42,4 +38,18 @@ input {
   margin: 7px;
   padding: 2px;
   width: 300px;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
 }

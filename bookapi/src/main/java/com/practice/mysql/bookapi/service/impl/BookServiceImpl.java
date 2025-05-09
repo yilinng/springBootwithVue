@@ -42,13 +42,14 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public BookDto createBook(Book book) {
+		System.out.println("create book " + book);
 		final String uuid = UUID.randomUUID().toString();
 		book.setNumber(uuid);
 
 		LocalDate createDate = LocalDate.now();
 		book.setCreate_date(createDate);
 
-		System.out.println("create book " + getUser());
+		System.out.println("create book getUser" + getUser());
 
 		book.setUser(userRepository.findByEmail(getUser().getUsername()));
 

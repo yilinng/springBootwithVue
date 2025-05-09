@@ -21,10 +21,13 @@ function signup() {
 </script>
 
 <template>
-  <div class="bg-gray-50 p-4">
-    <h2 class="flex justify-center text-3xl my-4">signup</h2>
-    <form @submit.prevent="signup">
-      <div class="w-1/2 md:w-full my-4 flex justify-center">
+  <div class="bg-gray-50 p-4 table md:block m-auto">
+    <h2 class="flex justify-center text-3xl my-4 md:m-auto">signup</h2>
+    <form
+      @submit.prevent="signup"
+      class="my-4 flex flex-col items-baseline md:items-center"
+    >
+      <div class="my-2">
         <label for="username">username: </label>
         <input
           type="text"
@@ -33,7 +36,7 @@ function signup() {
         />
       </div>
 
-      <div class="w-1/2 md:w-full flex justify-center">
+      <div class="my-2">
         <label for="email">email: </label>
         <input
           type="text"
@@ -42,7 +45,7 @@ function signup() {
         />
       </div>
 
-      <div class="w-1/2 md:w-full my-4 flex justify-center">
+      <div class="my-2">
         <label for="password">password: </label>
         <input
           type="text"

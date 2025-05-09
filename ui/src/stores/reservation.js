@@ -5,130 +5,164 @@ import { getTokenFromLocal } from '../utils/localStorage'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-export const useReservationStore = defineStore('reservation', () => {
-  const reservations = ref([])
-  const reservation = ref(null)
-  const token = ref(null)
-  const message = ref(null)
-  const errorMsg = ref(null)
-  const router = useRouter()
+export const useReservationStore = defineStore(
+  'reservation',
+  () => {
+    const reservations = ref([])
+    const reservation = ref(null)
+    const cartItems = ref([])
+    const token = ref(null)
+    const message = ref(null)
+    const errorMsg = ref(null)
+    const router = useRouter()
 
-  async function getReservations() {
-    try {
-      const { content } = await ReservationService.getAll()
-      reservations.value = content
+    async function getReservations() {
+      try {
+        const { content } = await ReservationService.getAll()
+        reservations.value = content
 
-      console.log('reservations', reservations.value)
-    } catch (err) {
-      handleError(err)
+        console.log('reservations', reservations.value)
+      } catch (err) {
+        handleError(err)
+      }
     }
-  }
 
-  async function getReservation(id) {
-    try {
-      const data = await ReservationService.getOne(id)
-      reservation.value = data
-    } catch (err) {
-      handleError(err)
+    async function getReservation(id) {
+      try {
+        const data = await ReservationService.getOne(id)
+        reservation.value = data
+      } catch (err) {
+        handleError(err)
+      }
     }
-  }
 
-  async function createReservation(obj) {
-    try {
-      const { content } = await ReservationService.create(obj)
-      reservations.value = books.value.push(content)
+    async function createReservation(obj) {
+      try {
+        const { content } = await ReservationService.create(obj)
+        reservations.value.push(content)
 
-      console.log('reservations', reservations.value)
-      message.value = 'create reservation success.'
+        console.log('reservations', reservations.value)
+        message.value = 'create reservation success.'
 
-      initMessage()
-      initReservation()
+        initMessage()
+        initReservation()
 
-      setTimeout(() => {
-        router.push('/reservations')
-      }, 5000)
-    } catch (err) {
-      handleError(err)
+        setTimeout(() => {
+          router.push('/reservations')
+        }, 5000)
+      } catch (err) {
+        handleError(err)
+      }
     }
-  }
 
-  async function editReservation(obj) {
-    try {
-      const { content } = await ReservationService.updateReservation(obj)
-      reservations.value = content
+    async function editReservation(obj) {
+      try {
+        const { content } = await ReservationService.updateReservation(obj)
+        reservations.value = content
 
-      console.log('reservations', reservations.value)
+        console.log('reservations', reservations.value)
 
-      message.value = 'update reservation success.'
+        message.value = 'update reservation success.'
 
-      initMessage()
-      initReservation()
+        initMessage()
+        initReservation()
 
-      setTimeout(() => {
-        router.push('/reservations')
-      }, 5000)
-    } catch (err) {
-      handleError(err)
+        setTimeout(() => {
+          router.push('/reservations')
+        }, 5000)
+      } catch (err) {
+        handleError(err)
+      }
     }
-  }
 
-  async function removeReservation(id) {
-    try {
-      const { content } = await ReservationService.deleteReservation(id)
-      reservations.value = reservations.value.filter(
-        (reservation) => reservation.id != id
-      )
+    async function removeReservation(id) {
+      try {
+        const { content } = await ReservationService.deleteReservation(id)
+        reservations.value = reservations.value.filter(
+          (reservation) => reservation.id != id
+        )
 
-      console.log('reservations', content)
+        console.log('reservations', content)
 
-      message.value = 'delete reservation success.'
+        message.value = 'delete reservation success.'
 
-      initMessage()
+        initMessage()
 
-      setTimeout(() => {
-        router.push('/reservations')
-      }, 5000)
-    } catch (err) {
-      handleError(err)
+        setTimeout(() => {
+          router.push('/reservations')
+        }, 5000)
+      } catch (err) {
+        handleError(err)
+      }
     }
-  }
 
-  function checkAuthorize() {
-    getToken()
-    if (token.value) {
-      ReservationService.setToken(token.value)
+    //https://stackoverflow.com/questions/237104/how-do-i-check-if-an-array-includes-a-value-in-javascript
+    function addToCart(obj) {
+      console.log('init addTocart', obj)
+
+      if (cartItems.value.length === 0) {
+        cartItems.value.push(obj)
+      }
+
+      if (
+        cartItems.value.length &&
+        cartItems.value.some((item) => item.id !== obj.id)
+      ) {
+        cartItems.value.push(obj)
+        console.log('addTocart no include', obj)
+      }
+
+      console.log('addTocart ', cartItems.value)
     }
-  }
 
-  function getToken() {
-    const data = getTokenFromLocal()
-    token.value = data
-  }
+    function removeFromCart(obj) {
+      cartItems.value = cartItems.value.filter((item) => item.id !== obj.id)
+      console.log('removefromcart ', cartItems.value)
+    }
 
-  function initReservation() {
-    reservation.value = null
-  }
+    function checkAuthorize() {
+      getToken()
+      if (token.value) {
+        ReservationService.setToken(token.value)
+      }
+    }
 
-  function initMessage() {
-    setTimeout(() => (message.value = null), 10000)
-  }
+    function getToken() {
+      const data = getTokenFromLocal()
+      token.value = data
+    }
 
-  function handleError(err) {
-    console.log('ohhh nooo, error appear')
-    console.log(err)
-  }
+    function initReservation() {
+      reservation.value = null
+      cartItems.value = []
+    }
 
-  return {
-    reservations,
-    reservation,
-    message,
-    errorMsg,
+    function initMessage() {
+      setTimeout(() => (message.value = null), 10000)
+    }
 
-    getReservations,
-    getReservation,
-    createReservation,
-    editReservation,
-    removeReservation,
-    checkAuthorize,
+    function handleError(err) {
+      console.log('ohhh nooo, error appear')
+      console.log(err)
+    }
+
+    return {
+      reservations,
+      reservation,
+      message,
+      errorMsg,
+      cartItems,
+      getReservations,
+      getReservation,
+      createReservation,
+      editReservation,
+      removeReservation,
+      checkAuthorize,
+      addToCart,
+      removeFromCart,
+    }
+  },
+  {
+    persist: true,
   }
-})
+)

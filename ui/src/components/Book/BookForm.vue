@@ -22,6 +22,7 @@ console.log('update book', bookStore.book, route.params.id)
 const title = ref('')
 const author = ref('')
 const price = ref(0)
+const inventory = ref(0)
 
 watch(
   bookStore,
@@ -31,6 +32,7 @@ watch(
       title.value = bookStore.book.title
       author.value = bookStore.book.author
       price.value = bookStore.book.price
+      inventory.value = bookStore.book.inventory
     }
   },
   { deep: true }
@@ -40,20 +42,21 @@ watch(
 
 function createBook(e) {
   e.preventDefault()
-  if (!title.value || !author.value || price.value === 0) {
+  if (!title.value || !author.value || price.value === 0 || inventory === 0) {
     return
   }
   bookStore.createBook({
     title: title.value,
     author: author.value,
     price: price.value,
+    inventory: inventory.value,
   })
 }
 
 function updateBook(e) {
   e.preventDefault()
 
-  if (!title.value || !author.value || price.value === 0) {
+  if (!title.value || !author.value || price.value === 0 || inventory === 0) {
     return
   }
   bookStore.editBook({
@@ -61,6 +64,7 @@ function updateBook(e) {
     title: title.value,
     author: author.value,
     price: price.value,
+    inventory: inventory.value,
   })
 }
 
@@ -68,6 +72,7 @@ function initRef() {
   title.value = null
   author.value = null
   price.value = 0
+  inventory.value = 0
 }
 
 function backAction() {
@@ -76,12 +81,12 @@ function backAction() {
 </script>
 
 <template>
-  <div class="bg-gray-50 p-4">
+  <div class="bg-gray-50 p-4 table md:block m-auto">
     <h2 class="flex justify-center text-3xl my-4">
       {{ book_Id ? 'Edit Book' : 'Create Book' }}
     </h2>
-    <form>
-      <div class="w-1/2 md:w-full my-4 flex justify-center">
+    <form class="my-4 flex flex-col items-baseline md:items-center">
+      <div class="flex items-center">
         <label for="title">title: </label>
         <input
           type="text"
@@ -90,7 +95,7 @@ function backAction() {
         />
       </div>
 
-      <div class="w-1/2 md:w-full flex justify-center">
+      <div class="flex items-center">
         <label for="author">author: </label>
         <input
           type="text"
@@ -99,12 +104,21 @@ function backAction() {
         />
       </div>
 
-      <div class="w-1/2 md:w-full my-4 flex justify-center">
+      <div class="flex justify-start items-center">
         <label for="price">price: </label>
         <input
           type="number"
           v-model="price"
-          class="border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+          class="border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent w-1/2"
+        />
+      </div>
+
+      <div class="flex justify-start items-center">
+        <label for="price">inventory: </label>
+        <input
+          type="number"
+          v-model="inventory"
+          class="border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent w-1/2"
         />
       </div>
 

@@ -27,6 +27,7 @@ module.exports = {
       borderRadius: {
         '4xl': '2rem',
       },
+      transitionProperty: { size: 'width, height' },
     },
   },
   variants: {

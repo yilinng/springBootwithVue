@@ -103,9 +103,11 @@ public class UserServiceImpl implements UserService {
 			throw new UserNotFoundException("user could not be found");
 		}
 
+		UserDto mapUser = UserMapper.mapToDto(user);
+
 		jwtAuthResponse.setAccessToken(token.get("accessToken"));
 		jwtAuthResponse.setRefreshToken(token.get("refreshToken"));
-		jwtAuthResponse.setUserId(Integer.toString(user.getId()));
+		jwtAuthResponse.setUser(mapUser);
 
 		jwtAuthResponse.setMessage("login success.");
 

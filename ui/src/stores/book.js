@@ -41,8 +41,9 @@ export const useBookStore = defineStore('book', () => {
 
   async function createBook(obj) {
     try {
+      console.log('create book', obj)
       const { content } = await addBook(obj)
-      books.value = books.value.push(content)
+      books.value.push(content)
 
       console.log('books', books.value)
       message.value = 'create book success.'
@@ -99,9 +100,7 @@ export const useBookStore = defineStore('book', () => {
 
   function checkAuthorize() {
     getToken()
-    if (token.value) {
-      setToken(token.value)
-    }
+    setToken(token.value)
   }
 
   function getToken() {

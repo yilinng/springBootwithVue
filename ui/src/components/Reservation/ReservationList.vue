@@ -23,18 +23,11 @@ watch(
   { deep: true }
 )
 */
-
-function substringTxt(txt) {
-  if (txt.length > 40) {
-    return txt.subString(0, 40) + '...'
-  }
-  return txt
-}
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <div class="create_reservation_url bg-blue-500 text-white m-2 p-2 w-64">
+  <div class="flex flex-col items-center">
+    <div class="create_reservation_url bg-blue-500 text-white m-2 p-2">
       <RouterLink class="navbar-brand text-2xl" to="/reservations/create"
         >create Reservation</RouterLink
       >
@@ -48,7 +41,13 @@ function substringTxt(txt) {
         :to="{ name: 'Reservation', params: { id: reservation.id } }"
       >
         <div class="flex flex-col">
-          <h2 class="text-2xl">{{ substringTxt(reservation.title) }}</h2>
+          <h2 class="text-2xl">
+            {{
+              reservation.title > 60
+                ? reservation.title.toString().substring(0, 60) + '...'
+                : reservation.title
+            }}
+          </h2>
           <p class="font-xl">create date: {{ reservation.createDate }}</p>
         </div>
       </RouterLink>

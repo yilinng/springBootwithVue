@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.practice.mysql.bookapi.dto.ReservationDto;
 import com.practice.mysql.bookapi.dto.ReservationsResponse;
-import com.practice.mysql.bookapi.exception.BookNotFoundException;
 
 import com.practice.mysql.bookapi.exception.ReservationNotFoundException;
 
@@ -26,7 +25,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import java.util.stream.Collectors;

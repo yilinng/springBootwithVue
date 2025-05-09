@@ -15,7 +15,7 @@ userStore.checkAuthorize()
 watch(
   userStore,
   (state) => {
-    console.log('watch user state', state)
+    console.log('watch user state from app.vue', state)
   },
   { deep: true }
 )
