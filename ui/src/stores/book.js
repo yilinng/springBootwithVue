@@ -5,6 +5,7 @@ import {
   addBook,
   updateBook,
   deleteBook,
+  searchBook,
   setToken,
 } from '../services/book'
 import { getTokenFromLocal } from '../utils/localStorage'
@@ -14,6 +15,7 @@ import { useRouter } from 'vue-router'
 export const useBookStore = defineStore('book', () => {
   const books = ref([])
   const book = ref(null)
+  const searchBooks = ref([])
   const token = ref(null)
   const message = ref(null)
   const errorMsg = ref(null)
@@ -98,6 +100,19 @@ export const useBookStore = defineStore('book', () => {
     }
   }
 
+  async function searchByTitle(text) {
+    if (!text) {
+      initBook()
+    }
+
+    try {
+      const { content } = await searchBook(text)
+      searchBooks.value = content
+    } catch (err) {
+      handleError(err)
+    }
+  }
+
   function checkAuthorize() {
     getToken()
     setToken(token.value)
@@ -110,6 +125,7 @@ export const useBookStore = defineStore('book', () => {
 
   function initBook() {
     book.value = null
+    searchBooks.value = []
   }
 
   function initMessage() {
@@ -124,6 +140,7 @@ export const useBookStore = defineStore('book', () => {
   return {
     books,
     book,
+    searchBooks,
     message,
     errorMsg,
     getBooks,
@@ -131,6 +148,7 @@ export const useBookStore = defineStore('book', () => {
     createBook,
     editBook,
     removeBook,
+    searchByTitle,
     checkAuthorize,
   }
 })

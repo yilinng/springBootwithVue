@@ -55,6 +55,13 @@ export const updateBook = async (obj) => {
   return data
 }
 
+export const searchBook = async (text) => {
+  console.log('searchBook', text)
+
+  const { data } = await axios.get(`${apiBaseUrl}/books/search/?txt=${text}`)
+  return data
+}
+
 /*
 export default {
   setToken,

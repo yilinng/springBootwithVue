@@ -108,7 +108,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsI
 GET http://localhost:8080/api/books/1
 
 ###
-GET http://localhost:8080/api/books/search/?txt="post"
+GET http://localhost:8080/api/books/search/?txt="why"
 
 ###
 GET http://localhost:8080/api/reservations/
