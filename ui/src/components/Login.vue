@@ -25,9 +25,9 @@ function login() {
     <h2 class="flex justify-center text-3xl my-4 md:m-auto">login</h2>
     <form
       @submit.prevent="login"
-      class="my-4 flex flex-col items-baseline md:items-center"
+      class="flex flex-col items-baseline md:items-center space-y-2"
     >
-      <div class="my-2">
+      <div class="email">
         <label for="email">email: </label>
         <input
           type="text"
@@ -35,7 +35,7 @@ function login() {
           class="border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
         />
       </div>
-      <div class="my-2">
+      <div class="password">
         <label for="password">password: </label>
         <input
           type="text"
@@ -58,7 +58,9 @@ function login() {
         </div>
       </div>
 
-      <div class="flex justify-center">{{ userStore.message }}</div>
+      <div class="flex justify-center">
+        userStore.message: {{ userStore.message }}
+      </div>
     </form>
   </div>
 </template>

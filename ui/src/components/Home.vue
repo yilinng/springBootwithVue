@@ -23,7 +23,7 @@ const sliceBooks = computed(() => {
     <h2>Hot New Releases</h2>
     <div class="flex flex-wrap md:flex-nowrap my-4">
       <div
-        class="book p-2 border-solid border-4 border-light-blue-500 w-full md:w-1/2"
+        class="book p-2 border-solid border-2 border-light-blue-500 w-full md:w-1/2"
         v-for="book of sliceBooks"
       >
         <RouterLink

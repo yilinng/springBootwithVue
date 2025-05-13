@@ -34,8 +34,13 @@ watch(
 )
 </script>
 <template>
-  <div class="border">
-    <input type="text" v-model.trim="searchTxt" placeholder="search.." />
+  <div class="my-4">
+    <input
+      class="border border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+      type="text"
+      v-model.trim="searchTxt"
+      placeholder="search.."
+    />
 
     <div
       class="searchList"
@@ -47,7 +52,7 @@ watch(
       "
     >
       <div
-        class="bookSearch p-2 border-solid border-4 border-light-blue-500"
+        class="bookSearch p-2 border-solid border-2 border-light-blue-500"
         v-for="book of bookStore.searchBooks"
       >
         <RouterLink
@@ -55,7 +60,7 @@ watch(
           :to="{ name: 'Book', params: { id: book.id } }"
         >
           <div class="flex flex-col">
-            <h2 class="text-2xl">
+            <h2 class="text-xl">
               {{
                 book.title.length > 60
                   ? book.title.toString().substring(0, 60) + '...'

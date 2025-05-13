@@ -25,9 +25,9 @@ function signup() {
     <h2 class="flex justify-center text-3xl my-4 md:m-auto">signup</h2>
     <form
       @submit.prevent="signup"
-      class="my-4 flex flex-col items-baseline md:items-center"
+      class="flex flex-col items-baseline md:items-center space-y-2"
     >
-      <div class="my-2">
+      <div class="username">
         <label for="username">username: </label>
         <input
           type="text"
@@ -36,7 +36,7 @@ function signup() {
         />
       </div>
 
-      <div class="my-2">
+      <div class="email">
         <label for="email">email: </label>
         <input
           type="text"
@@ -45,7 +45,7 @@ function signup() {
         />
       </div>
 
-      <div class="my-2">
+      <div class="password">
         <label for="password">password: </label>
         <input
           type="text"
@@ -68,8 +68,10 @@ function signup() {
         </div>
       </div>
 
-      <div class="flex justify-center">
-        userStore.message: {{ userStore.message }}
+      <div class="flex flex-col">
+        <p>userStore.message: {{ userStore.message }}</p>
+        <p>admin: xxx@admin.edu</p>
+        <p>employee: xxx@employee.edu</p>
       </div>
     </form>
   </div>
