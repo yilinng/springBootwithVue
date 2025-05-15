@@ -12,10 +12,14 @@ import { getTokenFromLocal } from '../utils/localStorage'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+import { Book, BookDefault } from '../types/types'
+import axios from 'axios'
+
 export const useBookStore = defineStore('book', () => {
   const books = ref([])
   const book = ref(null)
   const searchBooks = ref([])
+  const filteredBooks = ref([])
   const token = ref(null)
   const message = ref(null)
   const errorMsg = ref(null)
@@ -32,7 +36,7 @@ export const useBookStore = defineStore('book', () => {
     }
   }
 
-  async function getBook(id) {
+  async function getBook(id: number) {
     try {
       const data = await getOne(id)
       book.value = data
@@ -41,11 +45,13 @@ export const useBookStore = defineStore('book', () => {
     }
   }
 
-  async function createBook(obj) {
+  async function createBook(obj: BookDefault) {
     try {
       console.log('create book', obj)
-      const { content } = await addBook(obj)
-      books.value.push(content)
+      const data = await addBook(obj)
+      books.value.push(data)
+
+      console.log('check createbook data', data)
 
       console.log('books', books.value)
       message.value = 'create book success.'
@@ -61,12 +67,11 @@ export const useBookStore = defineStore('book', () => {
     }
   }
 
-  async function editBook(obj) {
+  async function editBook(obj: Book) {
     try {
-      const { content } = await updateBook(obj)
-      books.value = content
+      const data = await updateBook(obj)
 
-      console.log('books', books.value)
+      console.log('check editbooks', data)
 
       message.value = 'update book success.'
 
@@ -81,12 +86,12 @@ export const useBookStore = defineStore('book', () => {
     }
   }
 
-  async function removeBook(id) {
+  async function removeBook(id: number) {
     try {
-      const { content } = await deleteBook(id)
+      const data = await deleteBook(id)
       books.value = books.value.filter((book) => book.id != id)
 
-      console.log('books', content)
+      console.log('remove books', data)
 
       message.value = 'delete book success.'
 
@@ -100,7 +105,7 @@ export const useBookStore = defineStore('book', () => {
     }
   }
 
-  async function searchByTitle(text) {
+  async function searchByTitle(text: String) {
     if (!text) {
       initBook()
     }
@@ -111,6 +116,12 @@ export const useBookStore = defineStore('book', () => {
     } catch (err) {
       handleError(err)
     }
+  }
+
+  function filteredById(books_id: number[]) {
+    filteredBooks.value = books.value.filter((book) =>
+      books_id.includes(book.id)
+    )
   }
 
   function checkAuthorize() {
@@ -126,21 +137,34 @@ export const useBookStore = defineStore('book', () => {
   function initBook() {
     book.value = null
     searchBooks.value = []
+    filteredBooks.value = []
   }
 
   function initMessage() {
-    setTimeout(() => (message.value = null), 10000)
+    setTimeout(() => ((message.value = null), (errorMsg.value = null)), 10000)
   }
 
-  function handleError(err) {
+  function handleError(err: any) {
     console.log('ohhh nooo, error appear')
     console.log(err)
+    if (axios.isAxiosError(err)) {
+      console.log(err.status)
+      //console.error(err.response)
+      console.log('errorString', err.response.data.message)
+
+      errorMsg.value = err.response.data.message
+
+      // Do something with this error...
+    } else {
+      console.error(err)
+    }
   }
 
   return {
     books,
     book,
     searchBooks,
+    filteredBooks,
     message,
     errorMsg,
     getBooks,
@@ -149,6 +173,7 @@ export const useBookStore = defineStore('book', () => {
     editBook,
     removeBook,
     searchByTitle,
+    filteredById,
     checkAuthorize,
   }
 })

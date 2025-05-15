@@ -1,7 +1,7 @@
-export const useDebounce = (func, delay) => {
+export const useDebounce = (func: any, delay: number) => {
   let timeout = null
 
-  return (...args) => {
+  return (...args: any) => {
     if (timeout) clearTimeout(timeout)
 
     timeout = setTimeout(() => {

@@ -165,7 +165,12 @@ function backAction() {
       </div>
 
       <div class="flex justify-center">
-        reservationStore.message: {{ reservationStore.message }}
+        <p v-if="reservationStore.message" class="text-green-300">
+          reservationStore.message: {{ reservationStore.message }}
+        </p>
+        <p v-if="reservationStore.errorMsg" class="text-red-500">
+          reservationStore.errorMsg: {{ reservationStore.errorMsg }}
+        </p>
       </div>
     </form>
   </div>

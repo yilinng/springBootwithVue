@@ -1,9 +1,16 @@
 import axios from 'axios'
 import { apiBaseUrl } from '../utils/constants'
+import {
+  DeleteResponse,
+  Reservation,
+  ReservationDefault,
+  ReservationDto,
+  ReservationsResponse,
+} from '../types/types'
 
-let token = null
+let token: string | null = null
 
-const setToken = (newToken) => {
+const setToken = (newToken: String) => {
   token = `Bearer ${newToken}`
 }
 
@@ -14,28 +21,34 @@ const getAll = async () => {
 
   console.log('check ', config)
 
-  const { data } = await axios.get(`${apiBaseUrl}/reservations/`, config)
+  const { data } = await axios.get<ReservationsResponse>(
+    `${apiBaseUrl}/reservations/`,
+    config
+  )
 
   return data
 }
 
-const getOne = async (id) => {
+const getOne = async (id: number) => {
   const config = {
     headers: { Authorization: token },
   }
-  const { data } = await axios.get(`${apiBaseUrl}/reservations/${id}`, config)
+  const { data } = await axios.get<ReservationDto>(
+    `${apiBaseUrl}/reservations/${id}`,
+    config
+  )
 
   return data
 }
 
-const create = async (newObject) => {
+const create = async (newObject: ReservationDefault) => {
   const config = {
     headers: { Authorization: token },
   }
 
   console.log('config', config)
 
-  const { data } = await axios.post(
+  const { data } = await axios.post<ReservationDto>(
     `${apiBaseUrl}/reservations/`,
     newObject,
     config
@@ -43,28 +56,28 @@ const create = async (newObject) => {
   return data
 }
 
-const deleteReservation = async (id) => {
+const deleteReservation = async (id: number) => {
   const config = {
     headers: { Authorization: token },
   }
 
   console.log('config', config)
 
-  const { data } = await axios.delete(
+  const { data } = await axios.delete<DeleteResponse>(
     `${apiBaseUrl}/reservations/${id}`,
     config
   )
   return data
 }
 
-const updateReservation = async (obj) => {
+const updateReservation = async (obj: Reservation) => {
   const config = {
     headers: { Authorization: token },
   }
 
   console.log('config', config)
 
-  const { data } = await axios.put(
+  const { data } = await axios.put<ReservationDto>(
     `${apiBaseUrl}/reservations/${obj.id}`,
     obj,
     config

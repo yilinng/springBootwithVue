@@ -59,7 +59,12 @@ function login() {
       </div>
 
       <div class="flex justify-center">
-        userStore.message: {{ userStore.message }}
+        <p v-if="userStore.message" class="text-green-300">
+          userStore.message: {{ userStore.message }}
+        </p>
+        <p v-if="userStore.errorMsg" class="text-red-500">
+          userStore.errorMsg: {{ userStore.errorMsg }}
+        </p>
       </div>
     </form>
   </div>

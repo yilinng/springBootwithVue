@@ -151,7 +151,12 @@ function backAction() {
       </div>
 
       <div class="flex justify-center">
-        bookStore.message: {{ bookStore.message }}
+        <p v-if="bookStore.message" class="text-green-500">
+          {{ bookStore.message }}
+        </p>
+        <p v-if="bookStore.errorMsg" class="text-red-500">
+          {{ bookStore.errorMsg }}
+        </p>
       </div>
     </form>
   </div>

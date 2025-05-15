@@ -4,6 +4,9 @@ import ReservationService from '../services/reservation'
 import { getTokenFromLocal } from '../utils/localStorage'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { Reservation, ReservationDefault } from '../types/types'
+import { Book } from '../types/types'
+import axios from 'axios'
 
 export const useReservationStore = defineStore(
   'reservation',
@@ -27,7 +30,7 @@ export const useReservationStore = defineStore(
       }
     }
 
-    async function getReservation(id) {
+    async function getReservation(id: number) {
       try {
         const data = await ReservationService.getOne(id)
         reservation.value = data
@@ -36,12 +39,14 @@ export const useReservationStore = defineStore(
       }
     }
 
-    async function createReservation(obj) {
+    async function createReservation(obj: ReservationDefault) {
       try {
-        const { content } = await ReservationService.create(obj)
-        reservations.value.push(content)
+        const data = await ReservationService.create(obj)
+        reservations.value.push(data)
 
-        console.log('reservations', reservations.value)
+        console.log('reservations data', data)
+
+        console.log('reservations value', reservations.value)
         message.value = 'create reservation success.'
 
         initMessage()
@@ -55,12 +60,13 @@ export const useReservationStore = defineStore(
       }
     }
 
-    async function editReservation(obj) {
+    async function editReservation(obj: Reservation) {
       try {
-        const { content } = await ReservationService.updateReservation(obj)
-        reservations.value = content
+        const data = await ReservationService.updateReservation(obj)
+        // reservations.value = content
 
-        console.log('reservations', reservations.value)
+        console.log('reservations data', data)
+        console.log('reservations values', reservations.value)
 
         message.value = 'update reservation success.'
 
@@ -75,14 +81,14 @@ export const useReservationStore = defineStore(
       }
     }
 
-    async function removeReservation(id) {
+    async function removeReservation(id: number) {
       try {
-        const { content } = await ReservationService.deleteReservation(id)
+        const data = await ReservationService.deleteReservation(id)
         reservations.value = reservations.value.filter(
           (reservation) => reservation.id != id
         )
 
-        console.log('reservations', content)
+        console.log('reservations', data)
 
         message.value = 'delete reservation success.'
 
@@ -97,7 +103,7 @@ export const useReservationStore = defineStore(
     }
 
     //https://stackoverflow.com/questions/237104/how-do-i-check-if-an-array-includes-a-value-in-javascript
-    function addToCart(obj) {
+    function addToCart(obj: Book) {
       console.log('init addTocart', obj)
 
       if (cartItems.value.length === 0) {
@@ -115,7 +121,7 @@ export const useReservationStore = defineStore(
       console.log('addTocart ', cartItems.value)
     }
 
-    function removeFromCart(obj) {
+    function removeFromCart(obj: Book) {
       cartItems.value = cartItems.value.filter((item) => item.id !== obj.id)
       console.log('removefromcart ', cartItems.value)
     }
@@ -138,12 +144,23 @@ export const useReservationStore = defineStore(
     }
 
     function initMessage() {
-      setTimeout(() => (message.value = null), 10000)
+      setTimeout(() => ((message.value = null), (errorMsg.value = null)), 10000)
     }
 
-    function handleError(err) {
+    function handleError(err: any) {
       console.log('ohhh nooo, error appear')
       console.log(err)
+      if (axios.isAxiosError(err)) {
+        console.log(err.status)
+        //console.error(err.response)
+        console.log('errorString', err.response.data.message)
+
+        errorMsg.value = err.response.data.message
+
+        // Do something with this error...
+      } else {
+        console.error(err)
+      }
     }
 
     return {

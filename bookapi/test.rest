@@ -68,7 +68,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8080/api/users/1/reservations
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjUxMDE0MSwiZXhwIjoxNzQ3MTE0OTQxfQ.cLS-ow77pKk7LafY9xtrtjgsBdlV9RM4cnWWEPfFEvM
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llZTEyQGVtcGxveWVlLmVkdSIsImlhdCI6MTc0NzI4OTE5MCwiZXhwIjoxNzQ3ODkzOTkwfQ.eNtfMLXaEvg_2qA044RCAaK7-Mj1kybe1H7-0b7ySOo
 
 
 ###
@@ -78,12 +78,12 @@ GET http://localhost:8080/api/books/
 ###
 POST http://localhost:8080/api/books/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjEyQGFkbWluLmVkdSIsImlhdCI6MTc0NjcwODEyNSwiZXhwIjoxNzQ3MzEyOTI1fQ.BkJywXGf5wN-f53-68xMSC-OYj5BvQQRfkBR0Hk1Awo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llZTEyQGVtcGxveWVlLmVkdSIsImlhdCI6MTc0NzI4OTE5MCwiZXhwIjoxNzQ3ODkzOTkwfQ.eNtfMLXaEvg_2qA044RCAaK7-Mj1kybe1H7-0b7ySOo
 
 {
-  "title": "The Let Them Theory: A Life-Changing Tool That Millions of People Can't Stop Talking About",
-  "author":"Mel Robbins",
-  "price": 183,
+  "title": "Onyx Storm (Deluxe Limited Edition) (The Empyrean, 3)",
+  "author":"Rebecca Yarros",
+  "price": 199,
   "inventory": 100
 }
 

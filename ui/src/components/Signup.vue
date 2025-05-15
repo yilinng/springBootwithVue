@@ -73,6 +73,15 @@ function signup() {
         <p>admin: xxx@admin.edu</p>
         <p>employee: xxx@employee.edu</p>
       </div>
+
+      <div class="flex justify-center">
+        <p v-if="userStore.message" class="text-green-300">
+          userStore.message: {{ userStore.message }}
+        </p>
+        <p v-if="userStore.errorMsg" class="text-red-500">
+          userStore.errorMsg: {{ userStore.errorMsg }}
+        </p>
+      </div>
     </form>
   </div>
 </template>

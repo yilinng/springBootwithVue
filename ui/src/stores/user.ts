@@ -14,6 +14,9 @@ import {
 } from '../utils/localStorage'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { Login, Signup, Role } from '../types/types'
+
+import axios from 'axios'
 
 //https://www.reddit.com/r/vuejs/comments/175bka4/pinia_data_is_lost_when_reloading_the_page/?rdt=57500
 export const useUserStore = defineStore(
@@ -31,7 +34,7 @@ export const useUserStore = defineStore(
 
     const router = useRouter()
 
-    async function signup(obj) {
+    async function signup(obj: Signup) {
       try {
         const data = await signupAction(obj)
         user.value = data
@@ -48,7 +51,7 @@ export const useUserStore = defineStore(
       }
     }
 
-    async function login(obj) {
+    async function login(obj: Login) {
       try {
         const data = await loginAction(obj)
 
@@ -68,13 +71,15 @@ export const useUserStore = defineStore(
 
         initMessage()
 
-        router.push('/bookList')
+        setTimeout(() => {
+          router.push('/bookList')
+        }, 5000)
       } catch (err) {
         handleError(err)
       }
     }
 
-    function setAuthorize(roles) {
+    function setAuthorize(roles: Role[]) {
       console.log('roles', roles)
 
       for (let i = 0; i < roles.length; i++) {
@@ -88,7 +93,7 @@ export const useUserStore = defineStore(
       }
     }
 
-    async function getCustomer(userid) {
+    async function getCustomer(userid: string) {
       try {
         const { id, username, email, roles, books, reservations } =
           await getUser(parseInt(userid))
@@ -140,7 +145,7 @@ export const useUserStore = defineStore(
     }
 
     function initMessage() {
-      setTimeout(() => (message.value = null), 10000)
+      setTimeout(() => ((message.value = null), (errorMsg.value = null)), 10000)
     }
 
     function initState() {
@@ -149,14 +154,33 @@ export const useUserStore = defineStore(
       user.value = null
       user_id.value = null
       token.value = null
+      errorMsg.value = null
+      message.value = null
       haveAuthorize.value = false
       haveAllAuthorize.value = false
       router.push('/login')
     }
 
-    function handleError(err) {
+    function handleError(err: any) {
       console.log('ohhh nooo, error appear')
       console.log(err)
+      if (axios.isAxiosError(err)) {
+        console.log(err.status)
+        //console.error(err.response)
+        console.log('errorString', err.response.data.message)
+
+        if (
+          err.response.data.message === '憑證錯誤' ||
+          err.response.data.message === 'Invalid credentials'
+        ) {
+          errorMsg.value = 'password is incorrect.'
+        } else {
+          errorMsg.value = err.response.data.message
+        }
+        // Do something with this error...
+      } else {
+        console.error(err)
+      }
     }
 
     return {

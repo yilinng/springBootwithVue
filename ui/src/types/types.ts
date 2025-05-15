@@ -1,21 +1,3 @@
-export interface Customer {
-  id: number
-  name: string
-  username: string
-  email: string
-  password: string
-  books: Book[]
-}
-
-export interface Book {
-  id: number
-  title: string
-  author: string
-  price: number
-  create_Date?: string
-  update_Date?: string
-}
-
 export interface Login {
   email: string
   password: string
@@ -27,10 +9,115 @@ export interface Signup {
   password: string
 }
 
-export interface AuthResponse {
-  accessToken: string | null
-  refreshToken: string | null
-  message: string | null
+export interface Role {
+  id: number
+  name: string
+  description: string
 }
 
-export type CustomerFromValue = Omit<Customer, 'id' | 'password'>
+export interface User {
+  id: number
+  username: string
+  email: string
+  roles: Role[]
+  reservations: Reservation[]
+  books: Book[]
+}
+
+export interface BaseBook {
+  id: number
+  title: string
+  author: string
+  create_date: string
+  update_date: string
+  price: number
+  inventory: number
+  reservations: Reservation[]
+}
+
+export interface Book extends BaseBook {
+  user: User
+}
+
+export interface BookDto extends BaseBook {
+  user_id: number
+}
+
+export interface BaseReservation {
+  id: number
+  title: string
+  price: number
+}
+
+export interface Reservation extends BaseReservation {
+  created_date: string
+  update_date: string
+  books: Book[]
+  user: User
+}
+
+export interface ReservationDto extends BaseReservation {
+  createDate: string
+  updateDate: string
+  books: Book[]
+  user_id: number
+}
+
+export interface ReservationInfo {
+  id: number
+  title: string
+  create_date: string
+  update_date: string
+  price: number
+  books: Book[]
+  user: User
+}
+
+export interface JWTAuthResponse {
+  accessToken: string
+  refreshToken: string
+  message: string
+  tokenType: string
+  user: User
+}
+
+export interface BaseResponse {
+  pageNo: number
+  pageSize: number
+  totalElements: number
+  totalPages: number
+  last: boolean
+}
+
+export interface UserResponse extends BaseResponse {
+  content: User[]
+}
+
+export interface BooksResponse extends BaseResponse {
+  content: BookDto[]
+}
+
+export interface ReservationsResponse extends BaseResponse {
+  content: ReservationDto[]
+}
+
+export interface UserReservationsResponse {
+  id: number
+  username: string
+  email: string
+  reservations: ReservationInfo[]
+}
+
+export interface DeleteResponse {
+  message: string
+}
+
+export type ReservationDefault = Omit<
+  Reservation,
+  'id' | 'price' | 'created_date' | 'update_date' | 'user'
+>
+
+export type BookDefault = Omit<
+  Book,
+  'id' | 'create_date' | 'update_date' | 'user' | 'reservations'
+>
